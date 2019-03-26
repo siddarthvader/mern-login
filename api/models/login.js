@@ -2,7 +2,7 @@ var db = require('../db');
 var jwt = require('jsonwebtoken');
 var moment = require('moment');
 
-exports.login = (req, res) => {
+exports.login = async (req, res) => {
     console.log('hit');
     console.log(req.body.email, req.body.password);
     db.get().collection('login').findOne({

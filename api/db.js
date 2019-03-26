@@ -7,20 +7,24 @@ const state = {
     db: null,
 }
 
-exports.connect = (done) => {
-    if (state.db) return done()
-
-    MongoClient.connect(process.env.MONGODB_URI, {
-        poolSize: 10
-        // other options can go here
-    }, (err, db) => {
-        if (err) return done(err)
-        state.db = db;
-        db.authenticate(process.env.DB_USERNAME, process.env.DB_PWD, (err, result) => {
-            assert.equal(true, result);
-            //console.log('connected');
-            done();
-        });
+exports.connect = function (done) {
+    if (state.db) return done();
+    return new Promise((resolve, reject) => {
+        MongoClient.connect(process.env.MONGODB_URI, {
+            poolSize: 10
+            // other options can go here
+        }, (err, db) => {
+            if (err) return reject(err)
+            state.db = db;
+            db.authenticate(process.env.DB_USERNAME, process.env.DB_PWD, (err, result) => {
+                assert.equal(true, result);
+                if (err) {
+                    reject(err)
+                }
+                //console.log('connected');
+                resolve();
+            });
+        })
     })
 }
 

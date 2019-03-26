@@ -16,29 +16,14 @@
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8",
-    "request": "^2.81.0"
+    "react-scripts": "2.1.8"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.4.2",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.0.5",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "css-loader": "^2.1.1",
-    "eslint": "^3.19.0",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "node-sass": "^4.11.0",
-    "nodemon": "^1.18.10",
-    "postcss-loader": "^3.0.0",
-    "style-loader": "^0.23.1",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0"
+    "eslint": "5.12.0"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "webpack",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "nodemon server.js"
@@ -53,7 +38,7 @@
     "not op_mini all"
   ],
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
-  "main": "index.js",
+  "main": "/src/index.js",
   "keywords": [
     "mern",
     "app"

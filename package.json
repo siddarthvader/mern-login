@@ -25,13 +25,14 @@
   },
   "devDependencies": {
     "eslint": "^3.19.0",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.18.10"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server":"nodemon server.js"
   },
   "eslintConfig": {
     "extends": "react-app"

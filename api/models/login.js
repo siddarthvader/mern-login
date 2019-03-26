@@ -53,19 +53,24 @@ exports.signup = (req, res) => {
             let userObj = {
                 "name": req.body.name,
                 "email": req.body.email,
-                "password": req.body.email,
+                "password": req.body.password,
                 "address": req.body.address,
                 "created_on": moment().unix()
             }
             db.get().collection('login').insert(userObj, function (err, results) {
                 //console.log(results,'sendUserAddDataToClient');
                 if (err) {
-                    res.status(500).end('Interal server error');
+                    res.sendStatus(500);
                 }
-                res.json(results);
+                res.json({
+                    msg: 'inserted successfully'
+                });
             });
         } else {
-            res.send(400).end('user already exists');
+
+            res.json({
+                msg: 'user already exists'
+            });
         }
     })
 };

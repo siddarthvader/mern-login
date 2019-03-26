@@ -4,13 +4,11 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const model = require('./api/models/login.js');
 const db = require('./api/db');
-// var http_IP='192.168.1.79';
-const http_IP = process.env.IP || '127.0.0.1';
 
 let app;
 
-db.connect(() => {
-	// console.log(err);
+db.connect().then(() => {
+	console.log('here');
 	app = express();
 	app.set('port', process.env.PORT || 3000);
 	app.use(bodyParser.json());

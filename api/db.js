@@ -21,7 +21,7 @@ exports.connect = function (done) {
                 if (err) {
                     reject(err)
                 }
-                //console.log('connected');
+                console.log('connected');
                 resolve();
             });
         })

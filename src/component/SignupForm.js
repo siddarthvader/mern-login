@@ -36,6 +36,10 @@ class SignupForm extends React.Component {
                     })
                         .then(({data}) => {
                             console.log(data);
+                            this
+                                .props
+                                .form
+                                .resetFields();
                             message.success(data.msg);
                         })
                 }
@@ -189,7 +193,11 @@ class SignupForm extends React.Component {
                     )}
                 </Form.Item>
                 <Form.Item {...tailFormItemLayout}>
-                    <Button type="primary" htmlType="submit">Register</Button>
+                    <Button type="primary" htmlType="submit" className="login-form-button">
+                        Register
+                    </Button>
+                    Or
+                    <a href="/">Login!</a>
                 </Form.Item>
             </Form>
         );

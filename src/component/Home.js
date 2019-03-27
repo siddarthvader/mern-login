@@ -5,26 +5,30 @@ import axios from 'axios';
 
 class Home extends React.Component {
     state = {
-        current: 'home'
+        current: 'home',
+        loading: true
     }
-    constructor(props) {
-        super(props);
-        if (localStorage.getItem('token')) {
-            this.setState({loading: true})
-            axios
-                .get('/api/validatetoken', {
-                headers: {
-                    authorization: localStorage.getItem('token')
+    componentDidMount(){
+      if (localStorage.getItem('token')) {
+        this.setState({loading: true})
+        axios
+            .get('/api/validatetoken', {
+            headers: {
+                authorization: localStorage.getItem('token')
+            }
+        })
+            .then(({data}) => {
+                if (data.err) {
+                    this.setState({redirect: true})
                 }
+                this.setState({loading: false})
+
             })
-                .then(({data}) => {
-                    if (data.err) {
-                        this.setState({redirect: true})
-                    }
-                })
-        } else {
-            this.setState({redirect: true})
-        }
+    } else {
+        this.setState({redirect: true});
+        this.setState({loading: false})
+
+    }
     }
     handleClick = (e) => {
         if (e.key === 'logout') {
@@ -39,7 +43,9 @@ class Home extends React.Component {
             return <Redirect to='/'/>;
         }
         if (loading) {
-            return <Spin/>
+            return <div>
+                <Spin/>
+            </div>
         }
         return (
             <Menu

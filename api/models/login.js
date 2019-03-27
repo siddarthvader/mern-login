@@ -31,7 +31,7 @@ exports.login = async (req, res) => {
 
 
 exports.generateJWT = (pwdRes, done) => {
-    // //console.log(pwdRes, 'generate jwt');
+    console.log(pwdRes, 'generate jwt');
     let token = jwt.sign({
         _id: pwdRes._id,
         email: pwdRes.email
@@ -41,6 +41,23 @@ exports.generateJWT = (pwdRes, done) => {
     return {
         token
     }
+}
+
+exports.validateToken = (req, res) => {
+    jwt.verify(req.headers.authorization, process.env.JWT_RANDO, (err, decoded) => {
+        //console.log("decodedTOken", err);
+        if (err) {
+            res.send({
+                err: true,
+                msg: 'invalid token'
+            });
+        } else {
+            // console.log(headers.token, "wow ya");
+            res.send({
+                msg: 'successful'
+            })
+        }
+    })
 }
 
 exports.signup = (req, res) => {
@@ -55,6 +72,7 @@ exports.signup = (req, res) => {
                 "email": req.body.email,
                 "password": req.body.password,
                 "address": req.body.address,
+                "website":req.body.website,
                 "created_on": moment().unix()
             }
             db.get().collection('login').insert(userObj, function (err, results) {
@@ -67,7 +85,6 @@ exports.signup = (req, res) => {
                 });
             });
         } else {
-
             res.json({
                 msg: 'user already exists'
             });

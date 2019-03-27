@@ -19,11 +19,12 @@ db.connect().then(() => {
 	app.use(express.static(path.join(__dirname, 'build')));
 
 
-	app.get('/', function (req, res) {
-		res.sendFile(path.join(__dirname, 'build', 'index.html'));
-	});
 	app.post('/api/signup', model.signup);
 	app.post('/api/login', model.login);
+	app.get('/api/validatetoken', model.validateToken);
+	app.get('*', function (req, res) {
+		res.sendFile(path.join(__dirname, 'build', 'index.html'));
+	});
 	app.listen(app.get('port'), () => {
 		console.log('Listening on localhost:' + app.get('port') + '...');
 	});
